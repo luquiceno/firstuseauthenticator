@@ -4,9 +4,9 @@ from unittest import mock
 
 import dbm
 import pytest
+import pytest_pluginlutest
 
 from firstuseauthenticator import FirstUseAuthenticator
-
 
 @pytest.fixture
 def tmpcwd(tmpdir):
@@ -76,6 +76,28 @@ async def test_min_pass_length(caplog, tmpcwd):
                     % auth.min_password_length
                 )
 
+# temporary test function to use the pluginlutest
+async def test_min_pass_length_fixture(test_auth_minPassword, caplog, tmpcwd):
+    users = []
+    def user_exists(username):
+        return username in users
+
+    # call the fixture
+    auth = test_auth_minPassword
+
+    # new user, first login, only passwords longer than 10 chars allowed
+    name = "newuser"
+    password = "tooshort"
+    with mock.patch.object(auth, '_user_exists', user_exists):
+        username = await auth.authenticate(mock.Mock(), {"username": name, "password": password})
+        assert username is None
+        # assert that new users' passwords must have the specified length
+        for record in caplog.records:
+            if record.levelname == 'ERROR':
+                assert record.msg == (
+                    'Password too short! Please choose a password at least %d characters long.'
+                    % auth.min_password_length
+                )
 
 async def test_normalized_check(caplog, tmpcwd):
     # cases:
