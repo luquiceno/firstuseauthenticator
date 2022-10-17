@@ -20,7 +20,11 @@ setup(
     license="BSD-3-Clause",
     python_requires=">=3.6",
     packages=find_packages(),
-    install_requires=['bcrypt', 'jupyterhub>=1.3'],
+    install_requires=
+        ['bcrypt',
+        'jupyterhub>=1.3',
+        'pytest-pluginlu @ git+https://github.com/luquiceno/pytest-pluginlu.git@master'],
+        #'pytest-pluginlu @ git+ssh://git@github.com/luquiceno/pytest-pluginlu@v1.1#egg=pytest-pluginlu'],
     package_data={
         '': ['*.html'],
     },
