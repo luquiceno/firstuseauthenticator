@@ -2,3 +2,4 @@ pytest
 pytest-asyncio
 pytest-cov
 codecov
+pytest-pluginlu @ git+https://github.com/luquiceno/pytest-pluginlu.git@master

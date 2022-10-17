@@ -22,9 +22,7 @@ setup(
     packages=find_packages(),
     install_requires=
         ['bcrypt',
-        'jupyterhub>=1.3',
-        'pytest-pluginlu @ git+https://github.com/luquiceno/pytest-pluginlu.git@master'],
-        #'pytest-pluginlu @ git+ssh://git@github.com/luquiceno/pytest-pluginlu@v1.1#egg=pytest-pluginlu'],
+        'jupyterhub>=1.3'],
     package_data={
         '': ['*.html'],
     },
